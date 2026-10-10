@@ -63,7 +63,7 @@ Each app lists `credits[]` (name, what it provides, licence, url). The Credits a
 
 ## Publish
 
-Deployment is `.github/workflows/deploy.yml`. It runs on every push to `main`: install with the lockfile, type check, lint, tests, build, link check, then deploy with the official Pages actions. No secrets are needed.
+Deployment is `.github/workflows/deploy.yml`. It runs on every push to `main` and on pull requests into it (pull requests only build and check; they never deploy): install with the lockfile, type check, lint, tests, build, link check, then deploy with the official Pages actions. No secrets are needed.
 
 **One-time setting:** repository **Settings > Pages > Build and deployment > Source: GitHub Actions**.
 
