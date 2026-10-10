@@ -1,0 +1,7 @@
+---
+import { statusLabel } from '../lib/content';
+import type { App } from '../lib/schema';
+interface Props { status: App['status']; }
+const { status } = Astro.props;
+---
+<span class="badge">{statusLabel[status]}</span>

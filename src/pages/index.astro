@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppTag from '../components/AppTag.astro';
+import { getApps, site, url } from '../lib/content';
+const apps = await getApps();
+---
+<BaseLayout>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <h1 id="hero-title">{site.name}</h1>
+    <p class="lede">{site.heroLine}</p>
+    <div class="gratitude note"><p>{site.gratitudeNote} <a href={url('/thanks/')}>Read the thanks</a>.</p></div>
+  </section>
+
+  <section class="pegboard" id="apps" aria-labelledby="apps-title">
+    <div class="wrap">
+      <h2 id="apps-title">My apps</h2>
+      <ul class="tags">
+        {apps.map((app) => <li><AppTag app={app} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="intro-title">
+    <h2 id="intro-title">Why I make them</h2>
+    <div class="prose">
+      {site.intro.map((p) => <p>{p}</p>)}
+      <p>You can read <a href={url('/how-i-build/')}>how I build</a>, or see the <a href={url('/credits/')}>open-source projects and licences</a> behind the apps.</p>
+    </div>
+  </section>
+</BaseLayout>

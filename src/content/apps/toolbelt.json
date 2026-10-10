@@ -1,0 +1,53 @@
+{
+  "slug": "toolbelt",
+  "name": "Toolbelt",
+  "tagline": "A cheat-sheet and snippet app that works without a connection.",
+  "summary": "An offline-first Android cheat-sheet and snippet app for developers and students.",
+  "status": "released",
+  "accent": "#FACC15",
+  "draftFields": ["status"],
+  "problem": "Commands and snippets are easy to forget and slow to look up, and a lot of study and work happens without a good connection. Toolbelt keeps the things you reach for in one place on your phone, ready to copy.",
+  "features": [
+    { "title": "Copy first", "text": "Every snippet is built to be copied in one tap." },
+    { "title": "Template fill-in", "text": "Snippets can contain {{variable}} placeholders that you fill in before copying." },
+    { "title": "Full-text search", "text": "Search across all snippets using SQLite FTS5." },
+    { "title": "Collections", "text": "Group the snippets you use together." },
+    { "title": "Usage tracking", "text": "The app keeps track of what you use." },
+    { "title": "Backup and import", "text": "Export and import your data as JSON." },
+    { "title": "Importable packs", "text": "Packs cover git, Linux, Python, Django, FastAPI, React, Docker, SQL, QA, cloud basics, networking, and data and ML, plus a pinned Study and Career pack." }
+  ],
+  "howItWorks": {
+    "text": "Packs are imported into a local SQLite database with an FTS5 index, so search and lookup never need a network. Snippets with {{variable}} placeholders ask for values first and then copy the finished text. Your data can be backed up to, and restored from, a JSON file.",
+    "diagram": {
+      "lanes": [
+        { "title": "Content", "nodes": [{ "label": "Packs", "note": "git, Linux, Python, Docker, SQL and more" }, { "label": "JSON backup" }] },
+        { "title": "On the phone", "nodes": [{ "label": "SQLite + FTS5", "note": "snippets, collections, usage" }] },
+        { "title": "In the app", "nodes": [{ "label": "Search and browse" }, { "label": "Fill in {{variables}}" }, { "label": "Copy" }] }
+      ],
+      "links": [{ "label": "import / export" }, { "label": "query" }]
+    }
+  },
+  "stack": [
+    { "name": "Expo (React Native)", "role": "the Android app" },
+    { "name": "TypeScript" },
+    { "name": "SQLite with FTS5", "role": "local storage and full-text search" },
+    { "name": "GitHub Actions", "role": "builds signed APKs" }
+  ],
+  "screens": [],
+  "learned": [],
+  "roadmap": [],
+  "links": {
+    "repo": "https://github.com/pewpiece/Toolbelt",
+    "releases": "https://github.com/pewpiece/Toolbelt/releases"
+  },
+  "credits": [
+    { "name": "Expo", "provides": "App framework and tooling", "licence": "MIT", "url": "https://github.com/expo/expo" },
+    { "name": "React Native", "provides": "Native UI runtime", "licence": "MIT", "url": "https://github.com/facebook/react-native" },
+    { "name": "TypeScript", "provides": "Typed JavaScript", "licence": "Apache-2.0", "url": "https://github.com/microsoft/TypeScript" },
+    { "name": "SQLite", "provides": "Local database and FTS5 search", "licence": "Public domain", "url": "https://www.sqlite.org/copyright.html" }
+  ],
+  "thanks": [
+    { "text": "Claude and Claude Code helped plan and write the app; I tested it and decided what shipped." }
+  ],
+  "draft": false
+}

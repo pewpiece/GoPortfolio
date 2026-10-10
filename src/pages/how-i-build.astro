@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NeedsReview from '../components/NeedsReview.astro';
+import { site, shown, url } from '../lib/content';
+const h = site.howIBuild;
+const steps = shown(h.steps);
+const helped = shown(h.aiHelped);
+const decided = shown(h.iDecided);
+---
+<BaseLayout title="How I build" description="How I plan with Claude, build with Claude Code, and test on real devices.">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>How I build</h1>
+      <p>{h.intro}</p>
+    </header>
+    <div class="prose">
+      <section aria-labelledby="steps">
+        <h2 id="steps">The process</h2>
+        <ol>
+          {steps.map((s) => <li><strong>{s.title}.</strong> {s.text} {s.draft && <NeedsReview />}</li>)}
+        </ol>
+      </section>
+      {helped.length > 0 && (
+        <section aria-labelledby="helped">
+          <h2 id="helped">What AI helps with</h2>
+          <ul>{helped.map((s) => <li>{s.text} {s.draft && <NeedsReview />}</li>)}</ul>
+        </section>
+      )}
+      {decided.length > 0 && (
+        <section aria-labelledby="decided">
+          <h2 id="decided">What I decide and check myself</h2>
+          <ul>{decided.map((s) => <li>{s.text} {s.draft && <NeedsReview />}</li>)}</ul>
+        </section>
+      )}
+      <section aria-labelledby="limits">
+        <h2 id="limits">Limits</h2>
+        <p>{h.limits}</p>
+        <p>Claude and Claude Code are on the <a href={url('/thanks/')}>thanks page</a> too.</p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

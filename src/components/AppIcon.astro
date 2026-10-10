@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import { iconFor } from '../lib/content';
+import type { App } from '../lib/schema';
+interface Props { app: App; big?: boolean; }
+const { app, big = false } = Astro.props;
+const icon = iconFor(app.slug);
+const size = big ? 176 : 128;
+---
+<span class={`icon-tile${big ? ' big' : ''}`} style={`--accent:${app.accent}`}>
+  {icon ? (
+    <Image src={icon} alt="" width={size} height={size} densities={[1, 2]} loading="eager" />
+  ) : (
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" fill={app.accent} />
+      <text x="32" y="44" text-anchor="middle" font-size="36" font-weight="800" fill="#12202e" font-family="Trebuchet MS, system-ui, sans-serif">{app.name[0]}</text>
+    </svg>
+  )}
+</span>

@@ -1,0 +1,29 @@
+---
+import type { App } from '../lib/schema';
+interface Props { diagram: NonNullable<App['howItWorks']>['diagram']; label: string; accent: string; }
+const { diagram, label, accent } = Astro.props;
+---
+{diagram && (
+  <ol class="diagram" style={`--accent:${accent}`} aria-label={label}>
+    {diagram.lanes.map((lane, i) => (
+      <>
+        <li class="lane-item">
+          <div class="lane">
+            <h3>{lane.title}</h3>
+            <ul class="nodes">
+              {lane.nodes.map((n) => (
+                <li>{n.label}{n.note && <small>{n.note}</small>}</li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        {diagram.links[i] && (
+          <li class="link">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v16M5 13l7 7 7-7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <span>{diagram.links[i]?.label}</span>
+          </li>
+        )}
+      </>
+    ))}
+  </ol>
+)}

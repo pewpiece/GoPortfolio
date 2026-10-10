@@ -1,0 +1,133 @@
+{
+  "slug": "golesync",
+  "name": "GoleSync",
+  "tagline": "Your Android phone and Linux laptop, talking over your own network.",
+  "summary": "Connects an Android phone and a Linux laptop over the local network: clipboard, files, remote control and safe command buttons.",
+  "status": "released",
+  "accent": "#38BDF8",
+  "problem": "Moving a link, a snippet or a file between a phone and a laptop usually means a cloud account or a cable. GoleSync does it directly over the local network, and keeps the laptop side locked down.",
+  "features": [
+    {
+      "title": "Text and clipboard",
+      "text": "Push text and clipboard contents in both directions."
+    },
+    {
+      "title": "File drop",
+      "text": "Send files between the phone and the laptop."
+    },
+    {
+      "title": "Phone as remote",
+      "text": "Use the phone for slides, media, trackpad and keyboard."
+    },
+    {
+      "title": "Command buttons",
+      "text": "Buttons on the phone run commands on the laptop, but only commands from an allow-list kept on the laptop."
+    },
+    {
+      "title": "Pause kill switch",
+      "text": "One switch pauses everything."
+    }
+  ],
+  "howItWorks": {
+    "text": "The laptop runs a small FastAPI agent (X11). The phone pairs with it by scanning a QR code, and every request after that carries a token. Traffic stays on the local network, and commands only run if they appear on the laptop's allow-list.",
+    "diagram": {
+      "lanes": [
+        {
+          "title": "Android phone",
+          "nodes": [
+            {
+              "label": "Expo app",
+              "note": "text, files, remote, command buttons"
+            }
+          ]
+        },
+        {
+          "title": "Your local network",
+          "nodes": [
+            {
+              "label": "QR pairing"
+            },
+            {
+              "label": "Token on every request"
+            }
+          ]
+        },
+        {
+          "title": "Linux laptop",
+          "nodes": [
+            {
+              "label": "FastAPI agent (X11)"
+            },
+            {
+              "label": "Command allow-list"
+            },
+            {
+              "label": "Pause switch"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "pair once"
+        },
+        {
+          "label": "LAN only"
+        }
+      ]
+    }
+  },
+  "stack": [
+    {
+      "name": "Expo (React Native)",
+      "role": "the Android app"
+    },
+    {
+      "name": "Python + FastAPI",
+      "role": "the laptop agent (X11)"
+    },
+    {
+      "name": "GitHub Actions",
+      "role": "builds the APK"
+    }
+  ],
+  "screens": [],
+  "learned": [],
+  "roadmap": [],
+  "links": {
+    "repo": "https://github.com/pewpiece/GoleSync",
+    "releases": "https://github.com/pewpiece/GoleSync/releases"
+  },
+  "credits": [
+    {
+      "name": "Expo",
+      "provides": "App framework and tooling",
+      "licence": "MIT",
+      "url": "https://github.com/expo/expo"
+    },
+    {
+      "name": "React Native",
+      "provides": "Native UI runtime",
+      "licence": "MIT",
+      "url": "https://github.com/facebook/react-native"
+    },
+    {
+      "name": "FastAPI",
+      "provides": "The laptop agent's web framework",
+      "licence": "MIT",
+      "url": "https://github.com/fastapi/fastapi"
+    },
+    {
+      "name": "Python",
+      "provides": "The laptop agent's language",
+      "licence": "PSF-2.0",
+      "url": "https://docs.python.org/3/license.html"
+    }
+  ],
+  "thanks": [
+    {
+      "text": "Claude and Claude Code helped plan and write the app; I tested it on a real phone and laptop and decided what shipped."
+    }
+  ],
+  "draft": false
+}

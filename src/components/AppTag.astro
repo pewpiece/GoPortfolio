@@ -1,0 +1,15 @@
+---
+import AppIcon from './AppIcon.astro';
+import StatusBadge from './StatusBadge.astro';
+import NeedsReview from './NeedsReview.astro';
+import { url, fieldIsDraft } from '../lib/content';
+import type { App } from '../lib/schema';
+interface Props { app: App; }
+const { app } = Astro.props;
+---
+<a class="tag" href={url(`/apps/${app.slug}/`)} style={`--accent:${app.accent}`}>
+  <AppIcon app={app} />
+  <h3>{app.name} {app.draft && <NeedsReview />}</h3>
+  <p>{app.summary} {fieldIsDraft(app, 'summary') && !app.draft && <NeedsReview />}</p>
+  <StatusBadge status={app.status} />
+</a>

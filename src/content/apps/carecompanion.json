@@ -1,0 +1,39 @@
+{
+  "slug": "carecompanion",
+  "name": "CareCompanion",
+  "tagline": "Medication reminders for elderly people and their families.",
+  "summary": "A care and medication-reminder app that aims to help elderly people and their families keep to medication schedules.",
+  "status": "prototype",
+  "accent": "#5EEAD4",
+  "problem": "Keeping to a medication schedule is hard, for the person taking the medicine and for the family who worry about it. CareCompanion aims to help both sides keep to the schedule.",
+  "features": [
+    { "title": "Medication reminders", "text": "Reminders for medication schedules (details to confirm).", "draft": true }
+  ],
+  "howItWorks": {
+    "text": "Architecture details are still to be confirmed.",
+    "diagram": {
+      "lanes": [
+        { "title": "App", "nodes": [{ "label": "Flutter app (to confirm)" }] },
+        { "title": "Backend", "nodes": [{ "label": "Firebase or Node.js (to confirm)" }] },
+        { "title": "Data", "nodes": [{ "label": "MongoDB (to confirm)" }] }
+      ],
+      "links": [{ "label": "to confirm" }, { "label": "to confirm" }]
+    }
+  },
+  "stack": [
+    { "name": "Flutter", "role": "possible app framework", "draft": true },
+    { "name": "Firebase or Node.js", "role": "possible backend", "draft": true },
+    { "name": "MongoDB", "role": "possible database", "draft": true }
+  ],
+  "screens": [],
+  "learned": [],
+  "roadmap": [],
+  "links": {},
+  "notice": "CareCompanion is a prototype and a project in development. It is not a medical device, it gives no medical advice, and it uses no real patient data.",
+  "credits": [
+    { "name": "Flutter", "provides": "Possible app framework", "licence": "BSD-3-Clause", "url": "https://github.com/flutter/flutter", "draft": true }
+  ],
+  "thanks": [],
+  "draftFields": ["tagline", "summary", "problem", "howItWorks"],
+  "draft": true
+}

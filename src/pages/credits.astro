@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NeedsReview from '../components/NeedsReview.astro';
+import { getApps, site, shown } from '../lib/content';
+const apps = await getApps();
+const groups = [
+  ...apps.map((a) => ({ title: a.name, credits: shown(a.credits) })),
+  { title: 'This website', credits: shown(site.siteCredits) },
+].filter((g) => g.credits.length > 0);
+---
+<BaseLayout title="Credits and licences" description="Open-source libraries, models and assets used in each app, with their licences.">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Credits and licences</h1>
+      <p>The open-source projects each app is built on. Where I am not sure of a licence, I leave the entry out until I have checked it.</p>
+    </header>
+    {groups.map((g, i) => (
+      <section class="credits-group" aria-labelledby={`g${i}`}>
+        <h2 id={`g${i}`}>{g.title}</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th scope="col">Name</th><th scope="col">What it provides</th><th scope="col">Licence</th></tr></thead>
+            <tbody>
+              {g.credits.map((c) => (
+                <tr>
+                  <th scope="row"><a href={c.url}>{c.name}</a> {c.draft && <NeedsReview />}</th>
+                  <td>{c.provides}</td>
+                  <td>{c.licence}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
