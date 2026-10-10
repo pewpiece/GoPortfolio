@@ -1,0 +1,37 @@
+{
+  "name": "Pewang Gole",
+  "tagline": "I build small, useful apps and write down who helped.",
+  "description": "Portfolio of Pewang Gole: small apps, and the people, tools and open-source projects behind them.",
+  "heroLine": "I build small, practical apps that work on your own phone and your own network, and I like to say thank you out loud.",
+  "intro": [
+    "These apps started as things I wanted for myself or that someone close to me asked for. Each one is a tool: it should do one job and do it without asking for an account.",
+    "Every app page says plainly what is released, what is still being built, and what I have not confirmed yet."
+  ],
+  "gratitudeNote": "None of this was built alone. The people, tools and open-source projects behind each app are on the thanks page.",
+  "footerThanks": "Thank you to everyone who helped.",
+  "links": { "github": "https://github.com/pewpiece" },
+  "siteCredits": [
+    { "name": "Astro", "provides": "Static site generator", "licence": "MIT", "url": "https://github.com/withastro/astro" },
+    { "name": "Bricolage Grotesque", "provides": "Heading typeface (via Fontsource)", "licence": "OFL-1.1", "url": "https://github.com/ateliertriay/bricolage" },
+    { "name": "Source Serif 4", "provides": "Body typeface (via Fontsource)", "licence": "OFL-1.1", "url": "https://github.com/adobe-fonts/source-serif" },
+    { "name": "sharp", "provides": "Image processing at build time", "licence": "Apache-2.0", "url": "https://github.com/lovell/sharp" },
+    { "name": "Fontsource", "provides": "Self-hosted font packages", "licence": "MIT", "url": "https://github.com/fontsource/fontsource" }
+  ],
+  "howIBuild": {
+    "intro": "I plan my ideas in conversation with Claude, build them with Claude Code, and then test and review the result myself on real devices.",
+    "steps": [
+      { "title": "Plan in conversation", "text": "I talk an idea through with Claude until the scope and the first version are clear." },
+      { "title": "Build with Claude Code", "text": "Claude Code writes and changes the code in my repositories while I direct it." },
+      { "title": "Test and review", "text": "I install the build on real devices, use it, and review what changed before anything is released." }
+    ],
+    "aiHelped": [
+      { "text": "Turning a rough idea into a plan and a task list.", "draft": true },
+      { "text": "Writing and refactoring code that I then read and run.", "draft": true }
+    ],
+    "iDecided": [
+      { "text": "What to build, what to leave out, and what counts as ready to release." },
+      { "text": "Whether something works: I check it on a real device rather than trusting a description of it." }
+    ],
+    "limits": "AI makes mistakes, so nothing on this site is a claim I have not checked. Where I have not confirmed something yet, it is marked as unconfirmed or left out."
+  }
+}

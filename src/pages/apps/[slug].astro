@@ -1,0 +1,106 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AppIcon from '../../components/AppIcon.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import NeedsReview from '../../components/NeedsReview.astro';
+import Diagram from '../../components/Diagram.astro';
+import Gallery from '../../components/Gallery.astro';
+import ThanksBox from '../../components/ThanksBox.astro';
+import { getApps, shown, fieldIsDraft, url } from '../../lib/content';
+import type { App } from '../../lib/schema';
+
+export const getStaticPaths = (async () => {
+  const apps = await getApps();
+  return apps.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}) satisfies GetStaticPaths;
+
+const { app } = Astro.props as { app: App };
+const features = shown(app.features);
+const stack = shown(app.stack);
+const learned = shown(app.learned);
+const roadmap = shown(app.roadmap);
+const draft = (f: App['draftFields'][number]) => fieldIsDraft(app, f);
+---
+<BaseLayout title={app.name} description={app.summary} ogSlug={app.slug}>
+  <div class="wrap" style={`--accent:${app.accent}`}>
+    <header class="app-head">
+      <AppIcon app={app} big />
+      <div>
+        <h1>{app.name} {app.draft && <NeedsReview />}</h1>
+        <p class="tagline">{app.tagline} {draft('tagline') && <NeedsReview />}</p>
+        <StatusBadge status={app.status} /> {draft('status') && <NeedsReview />}
+      </div>
+    </header>
+    <div class="accent-rule" aria-hidden="true"></div>
+
+    {app.notice && <div class="notice" role="note"><p><strong>Please note.</strong> {app.notice}</p></div>}
+
+    <div class="article">
+      <div>
+        <section aria-labelledby="problem">
+          <h2 id="problem">The problem</h2>
+          <p>{app.problem} {draft('problem') && <NeedsReview />}</p>
+        </section>
+
+        {features.length > 0 && (
+          <section aria-labelledby="features">
+            <h2 id="features">What it does</h2>
+            <ul class="features">
+              {features.map((f) => (
+                <li><strong>{f.title} {f.draft && <NeedsReview />}</strong>{f.text}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {app.howItWorks && (
+          <section aria-labelledby="how">
+            <h2 id="how">How it works</h2>
+            <p>{app.howItWorks.text} {draft('howItWorks') && <NeedsReview />}</p>
+            <Diagram diagram={app.howItWorks.diagram} label={`How ${app.name} fits together`} accent={app.accent} />
+          </section>
+        )}
+
+        {stack.length > 0 && (
+          <section aria-labelledby="stack">
+            <h2 id="stack">Built with</h2>
+            <ul class="stack">
+              {stack.map((s) => <li>{s.name}{s.role && <span>, {s.role}</span>} {s.draft && <NeedsReview />}</li>)}
+            </ul>
+          </section>
+        )}
+
+        <Gallery app={app} />
+
+        {learned.length > 0 && (
+          <section aria-labelledby="learned">
+            <h2 id="learned">What I learned</h2>
+            <ul class="plain">{learned.map((l) => <li>{l.text} {l.draft && <NeedsReview />}</li>)}</ul>
+          </section>
+        )}
+
+        {roadmap.length > 0 && (
+          <section aria-labelledby="next">
+            <h2 id="next">What's next</h2>
+            <ul class="plain">{roadmap.map((r) => <li>{r.text} {r.draft && <NeedsReview />}</li>)}</ul>
+          </section>
+        )}
+
+        {(app.links.repo || app.links.releases || app.links.demo) && (
+          <section aria-labelledby="links">
+            <h2 id="links">Get it</h2>
+            <div class="btn-row">
+              {app.links.releases && <a class="btn" href={app.links.releases}>Latest Android release on GitHub</a>}
+              {app.links.repo && <a class="btn quiet" href={app.links.repo}>Source code on GitHub</a>}
+              {app.links.demo && <a class="btn quiet" href={app.links.demo}>Demo</a>}
+            </div>
+          </section>
+        )}
+
+        <ThanksBox app={app} />
+        <p><a href={url('/#apps')}>Back to all apps</a></p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

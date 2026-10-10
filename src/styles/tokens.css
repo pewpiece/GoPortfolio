@@ -1,0 +1,50 @@
+/* Design tokens. Light and dark are both defined with light-dark(); the visitor's
+   choice sets color-scheme on <html> (see the inline script in BaseLayout). */
+:root {
+  color-scheme: light dark;
+
+  /* surfaces and text */
+  --paper: light-dark(#eef2f4, #0e1721);
+  --surface: light-dark(#ffffff, #16222f);
+  --ink: light-dark(#12202e, #e8eef3);
+  --ink-soft: light-dark(#3d4c5b, #b4c1cd);
+  --line: light-dark(#8a98a6, #5d6f80);
+  --line-faint: light-dark(#cfd8de, #26374a);
+  --peg: light-dark(#c3ced6, #2a3b4d);
+
+  /* brand: orange fills take ink text; orange text uses the darker/lighter variant */
+  --brand: #ff8a3d;
+  --brand-text: light-dark(#a63d00, #ffa264);
+  --on-accent: #12202e;
+  --focus: light-dark(#12202e, #ffffff);
+
+  /* type */
+  --font-display: 'Bricolage Grotesque Variable', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+
+  /* scale (about 1.25) */
+  --step--1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
+  --step-0: clamp(1.06rem, 1rem + 0.3vw, 1.2rem);
+  --step-1: clamp(1.3rem, 1.2rem + 0.5vw, 1.55rem);
+  --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
+  --step-3: clamp(2.1rem, 1.7rem + 2vw, 3.2rem);
+  --step-4: clamp(2.8rem, 2rem + 4vw, 5.6rem);
+
+  /* space */
+  --s-1: 0.5rem;
+  --s-2: 0.75rem;
+  --s-3: 1.25rem;
+  --s-4: 2rem;
+  --s-5: 3.5rem;
+  --s-6: 6rem;
+
+  --measure: 64ch;
+  --wide: 72rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --radius: 0.5rem;
+  --shadow: 0 1px 0 light-dark(rgba(18, 32, 46, 0.12), rgba(0, 0, 0, 0.5)),
+    0 6px 14px -8px light-dark(rgba(18, 32, 46, 0.35), rgba(0, 0, 0, 0.7));
+}
+
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }

@@ -1,0 +1,18 @@
+{
+  "intro": "Thank you to the people, tools and open-source projects that made these apps possible. I try to say what each one actually did.",
+  "peopleFallback": "A few friends, family members, lecturers and teammates helped with these apps. I will add their names here once I have asked each of them.",
+  "people": [
+    { "id": "friend-rago", "group": "friends", "name": "Friend who suggested RaGo Lens (name to add)", "note": "Suggested the idea for RaGo Lens and helped choose its name.", "show": false },
+    { "id": "family", "group": "family", "name": "My family (names to add)", "note": "Supported me while I built these apps and tried them on their own phones.", "show": false },
+    { "id": "lecturers", "group": "lecturers", "name": "Lecturers and mentors (names to add)", "note": "Taught me the foundations I build on and gave feedback on my work.", "show": false },
+    { "id": "teammates", "group": "teammates", "name": "Teammates (names to add)", "note": "Worked on projects with me and taught me how to build as a team.", "show": false }
+  ],
+  "tools": [
+    { "name": "Claude", "note": "I plan my app ideas in conversation with Claude, an AI assistant made by Anthropic.", "link": "https://claude.ai" },
+    { "name": "Claude Code", "note": "I build the apps with Claude Code, which writes and edits code in my repositories while I direct and review it.", "link": "https://claude.com/product/claude-code" },
+    { "name": "GitHub and GitHub Actions", "note": "GitHub hosts the code and the releases, and GitHub Actions builds the signed APKs and this site.", "link": "https://github.com" }
+  ],
+  "communities": [
+    { "name": "Open-source communities (to confirm)", "note": "The maintainers and communities behind the libraries listed on the credits page.", "draft": true }
+  ]
+}

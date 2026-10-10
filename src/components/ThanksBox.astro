@@ -1,0 +1,25 @@
+---
+import { shown, thanks, url } from '../lib/content';
+import NeedsReview from './NeedsReview.astro';
+import type { App } from '../lib/schema';
+interface Props { app: App; }
+const { app } = Astro.props;
+const items = shown(app.thanks).map((t) => {
+  const person = t.person ? thanks.people.find((p) => p.id === t.person) : undefined;
+  // A person's name is only used when show is true; otherwise the text stands on its own.
+  return { ...t, name: person?.show ? person.name : undefined, link: person?.show ? person.link : undefined };
+});
+---
+{items.length > 0 && (
+  <aside class="thanks-box" aria-labelledby="app-thanks" style={`--accent:${app.accent}`}>
+    <h2 id="app-thanks">Thanks</h2>
+    <ul>
+      {items.map((t) => (
+        <li>
+          {t.name && (<strong>{t.link ? <a href={t.link}>{t.name}</a> : t.name}: </strong>)}{t.text} {t.draft && <NeedsReview />}
+        </li>
+      ))}
+    </ul>
+    <p><a href={url('/thanks/')}>Everyone else I want to thank</a></p>
+  </aside>
+)}

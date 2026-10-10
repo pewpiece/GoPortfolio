@@ -1,0 +1,28 @@
+---
+---
+<fieldset class="theme" data-theme-toggle>
+  <legend>Colour theme</legend>
+  <button type="button" data-set="light" aria-pressed="false">Light</button>
+  <button type="button" data-set="dark" aria-pressed="false">Dark</button>
+  <button type="button" data-set="system" aria-pressed="true">System</button>
+</fieldset>
+<script>
+  const root = document.documentElement;
+  const group = document.querySelector<HTMLElement>('[data-theme-toggle]');
+  const read = () => {
+    try { const v = localStorage.getItem('theme'); return v === 'light' || v === 'dark' ? v : 'system'; } catch { return 'system'; }
+  };
+  const apply = (v: string) => {
+    if (v === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', v);
+    group?.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.set === v)));
+  };
+  apply(read());
+  group?.classList.add('is-ready');
+  group?.querySelectorAll<HTMLButtonElement>('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      const v = b.dataset.set ?? 'system';
+      try { if (v === 'system') localStorage.removeItem('theme'); else localStorage.setItem('theme', v); } catch { /* storage unavailable */ }
+      apply(v);
+    }),
+  );
+</script>

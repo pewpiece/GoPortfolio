@@ -1,0 +1,56 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { screenFor, shown, isDev } from '../lib/content';
+import NeedsReview from './NeedsReview.astro';
+import type { App } from '../lib/schema';
+interface Props { app: App; }
+const { app } = Astro.props;
+const items = shown(app.screens).flatMap((s) => {
+  const img = screenFor(app.slug, s.file);
+  return img ? [{ ...s, img }] : [];
+});
+const full = await Promise.all(items.map((s) => getImage({ src: s.img, width: 900, format: 'webp' })));
+---
+{items.length > 0 ? (
+  <section aria-labelledby="screens">
+    <h2 id="screens">Screenshots</h2>
+    <ul class="gallery" data-gallery>
+      {items.map((s, i) => (
+        <li>
+          <figure class="phone">
+            <button type="button" data-full={full[i]?.src} data-alt={s.alt} data-caption={s.caption} aria-label={`Enlarge: ${s.caption}`}>
+              <span class="frame"><Image src={s.img} alt={s.alt} widths={[240, 360, 480]} sizes="(min-width: 40rem) 12rem, 45vw" loading="lazy" /></span>
+            </button>
+            <figcaption>{s.caption} {s.draft && <NeedsReview />}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+    <dialog class="lightbox" aria-label="Screenshot viewer" data-lightbox>
+      <img alt="" />
+      <p data-caption></p>
+      <form method="dialog"><button class="btn quiet" autofocus>Close</button></form>
+    </dialog>
+  </section>
+) : (
+  isDev && (
+    <section aria-labelledby="screens">
+      <h2 id="screens">Screenshots</h2>
+      <p class="empty-state">Screenshots coming. Add files to <code>src/assets/apps/{app.slug}/screens/</code> and list them in the app's JSON. This box only shows in development.</p>
+    </section>
+  )
+)}
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  document.querySelectorAll<HTMLButtonElement>('[data-gallery] button').forEach((b) => {
+    b.addEventListener('click', () => {
+      if (!dialog) return;
+      const img = dialog.querySelector('img')!;
+      img.src = b.dataset.full ?? '';
+      img.alt = b.dataset.alt ?? '';
+      dialog.querySelector('[data-caption]')!.textContent = b.dataset.caption ?? '';
+      dialog.showModal();
+    });
+  });
+  dialog?.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+</script>

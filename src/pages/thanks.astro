@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NeedsReview from '../components/NeedsReview.astro';
+import { thanks, shown, visiblePeople, getApps, isDev, url } from '../lib/content';
+const apps = await getApps();
+const people = visiblePeople();
+const tools = shown(thanks.tools);
+const communities = shown(thanks.communities);
+const groups = [
+  ['friends', 'Friends'],
+  ['family', 'Family'],
+  ['lecturers', 'Lecturers and mentors'],
+  ['teammates', 'Teammates'],
+] as const;
+const openSource = apps.map((a) => ({ app: a, credits: shown(a.credits) })).filter((x) => x.credits.length > 0);
+---
+<BaseLayout title="Thanks" description="The people, tools and open-source projects that made these apps possible.">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Thanks</h1>
+      <p>{thanks.intro}</p>
+    </header>
+    <div class="prose">
+      <section aria-labelledby="people">
+        <h2 id="people">People</h2>
+        {people.length === 0 && <p>{thanks.peopleFallback}</p>}
+        {groups.map(([key, label]) => {
+          const list = people.filter((p) => p.group === key);
+          return list.length > 0 && (
+            <>
+              <h3>{label}</h3>
+              <ul class="thanks-list">
+                {list.map((p) => (
+                  <li>
+                    <strong>{p.link ? <a href={p.link}>{p.name}</a> : p.name}</strong>: {p.note}
+                    {!p.show && isDev && <> <span class="badge review">hidden in production (show: false)</span></>}
+                  </li>
+                ))}
+              </ul>
+            </>
+          );
+        })}
+      </section>
+
+      <section aria-labelledby="tools">
+        <h2 id="tools">Tools</h2>
+        <ul class="thanks-list">
+          {tools.map((t) => (
+            <li><strong>{t.link ? <a href={t.link}>{t.name}</a> : t.name}</strong>: {t.note} {t.draft && <NeedsReview />}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="oss">
+        <h2 id="oss">Open-source projects and models</h2>
+        <p>These are listed from each app's credits. Licences and links are on the <a href={url('/credits/')}>credits page</a>.</p>
+        {openSource.map(({ app, credits }) => (
+          <p><strong>{app.name}:</strong> {credits.map((c) => c.name).join(', ')}.</p>
+        ))}
+      </section>
+
+      {communities.length > 0 && (
+        <section aria-labelledby="communities">
+          <h2 id="communities">Communities</h2>
+          <ul class="thanks-list">
+            {communities.map((c) => (
+              <li><strong>{c.link ? <a href={c.link}>{c.name}</a> : c.name}</strong>: {c.note} {c.draft && <NeedsReview />}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </div>
+</BaseLayout>

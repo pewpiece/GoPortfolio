@@ -1,0 +1,53 @@
+{
+  "slug": "rago-lens",
+  "name": "RaGo Lens",
+  "tagline": "Remove a photo's background offline and export a transparent PNG.",
+  "summary": "An offline Android app that removes a photo's background and exports a transparent PNG, with a full editor.",
+  "status": "in-development",
+  "accent": "#FF8A3D",
+  "problem": "Cutting an object out of a photo usually means uploading it to a website. RaGo Lens does it on the phone, offline, and gives you the tools to fix the edges yourself.",
+  "features": [
+    { "title": "Background removal", "text": "Removes the background and exports a transparent PNG, offline." },
+    { "title": "Full editor", "text": "Tap to select regions, lasso and brush tools, deep zoom, and rotate, flip and scale." },
+    { "title": "Shadows", "text": "Add a shadow to the cut-out." },
+    { "title": "For sellers", "text": "Marketplace presets and batch export." }
+  ],
+  "howItWorks": {
+    "text": "A background-removal model runs on the phone through ONNX Runtime, so the photo never leaves the device. The editor lets you correct the result before exporting a transparent PNG.",
+    "diagram": {
+      "lanes": [
+        { "title": "Input", "nodes": [{ "label": "Photo" }] },
+        { "title": "On the phone, offline", "nodes": [{ "label": "ONNX Runtime", "note": "background removal" }, { "label": "Editor", "note": "select, lasso, brush, zoom, shadows" }] },
+        { "title": "Output", "nodes": [{ "label": "Transparent PNG" }, { "label": "Batch export with marketplace presets" }] }
+      ],
+      "links": [{ "label": "process" }, { "label": "export" }]
+    }
+  },
+  "stack": [
+    { "name": "Expo (React Native)", "role": "the Android app" },
+    { "name": "TypeScript" },
+    { "name": "ONNX Runtime", "role": "runs the model on the phone" },
+    { "name": "SQLite" }
+  ],
+  "screens": [],
+  "learned": [],
+  "roadmap": [
+    { "text": "Turn a photo of a notebook page into formatted text (OCR). This is planned and not built yet." }
+  ],
+  "links": {
+    "repo": "https://github.com/pewpiece/RaGo-Lens"
+  },
+  "notice": "RaGo Lens is still in development and has no public release yet.",
+  "credits": [
+    { "name": "Expo", "provides": "App framework and tooling", "licence": "MIT", "url": "https://github.com/expo/expo" },
+    { "name": "React Native", "provides": "Native UI runtime", "licence": "MIT", "url": "https://github.com/facebook/react-native" },
+    { "name": "ONNX Runtime", "provides": "On-device model inference", "licence": "MIT", "url": "https://github.com/microsoft/onnxruntime" },
+    { "name": "SQLite", "provides": "Local database", "licence": "Public domain", "url": "https://www.sqlite.org/copyright.html" },
+    { "name": "Background-removal model (name to confirm)", "provides": "The segmentation model that cuts out the subject", "licence": "To confirm", "url": "https://onnx.ai", "draft": true }
+  ],
+  "thanks": [
+    { "text": "A friend suggested the idea and helped choose the name. \"Rago\" is the Nepali word for a male buffalo, which is also the logo.", "person": "friend-rago" },
+    { "text": "Claude and Claude Code helped plan and write the app; I test and decide what ships." }
+  ],
+  "draft": false
+}
