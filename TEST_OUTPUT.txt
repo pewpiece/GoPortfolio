@@ -1,0 +1,86 @@
+TEST OUTPUT (generated 2026-10-10, Node v22.22.0, real output from this session)
+
+== npm run check (astro check)
+08:03:58 [check] Getting diagnostics for Astro files in /home/user/GoPortfolio...
+Result (25 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+
+== npm run lint
+> portfolio@1.0.0 lint
+> eslint .
+
+
+== npm test (vitest)
+
+
+ Test Files  1 passed (1)
+      Tests  24 passed (24)
+   Start at  08:04:05
+   Duration  511ms (transform 53%, import 34%, tests 11%, worker 2%)
+
+
+== npm run linkcheck
+Checked 111 internal references across 8 pages.
+All internal links resolve.
+
+== npm run a11y (axe light+dark, overflow 320/768/1440, keyboard, reduced motion, theme persistence)
+axe [light] /: 0 violations, 36 rules passed
+axe [light] /apps/toolbelt/: 0 violations, 36 rules passed
+axe [light] /apps/golesync/: 0 violations, 36 rules passed
+axe [light] /apps/rago-lens/: 0 violations, 40 rules passed
+axe [light] /how-i-build/: 0 violations, 34 rules passed
+axe [light] /thanks/: 0 violations, 34 rules passed
+axe [light] /credits/: 0 violations, 39 rules passed
+axe [light] /404.html: 0 violations, 33 rules passed
+axe [dark] /: 0 violations, 36 rules passed
+axe [dark] /apps/toolbelt/: 0 violations, 36 rules passed
+axe [dark] /apps/golesync/: 0 violations, 36 rules passed
+axe [dark] /apps/rago-lens/: 0 violations, 40 rules passed
+axe [dark] /how-i-build/: 0 violations, 34 rules passed
+axe [dark] /thanks/: 0 violations, 34 rules passed
+axe [dark] /credits/: 0 violations, 39 rules passed
+axe [dark] /404.html: 0 violations, 33 rules passed
+overflow @320px /: none
+overflow @320px /apps/toolbelt/: none
+overflow @320px /apps/golesync/: none
+overflow @320px /apps/rago-lens/: none
+overflow @320px /how-i-build/: none
+overflow @320px /thanks/: none
+overflow @320px /credits/: none
+overflow @320px /404.html: none
+overflow @768px /: none
+overflow @768px /apps/toolbelt/: none
+overflow @768px /apps/golesync/: none
+overflow @768px /apps/rago-lens/: none
+overflow @768px /how-i-build/: none
+overflow @768px /thanks/: none
+overflow @768px /credits/: none
+overflow @768px /404.html: none
+overflow @1440px /: none
+overflow @1440px /apps/toolbelt/: none
+overflow @1440px /apps/golesync/: none
+overflow @1440px /apps/rago-lens/: none
+overflow @1440px /how-i-build/: none
+overflow @1440px /thanks/: none
+overflow @1440px /credits/: none
+overflow @1440px /404.html: none
+keyboard tab order: Skip to main content > Pewang Gole > Apps > How I build > Thanks > Credits > Light > Dark > System > Read the thanks > TToolbelt An offline-first A > GGoleSync Connects an Androi > RRaGo Lens An offline Androi > how I build
+keyboard: first stop "Skip to main content", 0 stops without a visible focus outline
+reduced motion: .tag animation-name = none
+no preference: .tag animation-name = settle
+theme saved: data-theme=dark, body background=rgb(14, 23, 33)
+
+All accessibility and layout checks passed.
+
+== Lighthouse
+Lighthouse / (lighthouse 13.5.0, mobile emulation, simulated throttling, local preview server)
+  performance=98  accessibility=100  best-practices=100  seo=100
+  LCP=1.8 s  CLS=0.018  TBT=0 ms
+Lighthouse /apps/golesync/ (lighthouse 13.5.0, mobile emulation, simulated throttling, local preview server)
+  performance=100  accessibility=100  best-practices=100  seo=100
+  LCP=1.4 s  CLS=0.031  TBT=0 ms
+
+Notes: Lighthouse ran headless Chromium against the local preview server, not the deployed site, so network timings differ from production. Screen-reader testing and real-device testing were not done.

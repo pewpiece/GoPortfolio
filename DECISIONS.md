@@ -48,3 +48,10 @@ Accent rule: app accents are **fills only** (tag band, icon tile, swatch). They 
 - **Diagrams** are CSS/HTML (lanes with connectors) so they reflow to a vertical stack on a 320 px phone, which a scaled SVG could not do legibly.
 - **Placeholders.** Missing icons render a generated tile (initial on the accent colour) and are listed in the build report.
 - **Deployment.** `SITE_URL` and `BASE_PATH` env vars configure `site` and `base`; defaults are `https://pewpiece.github.io` and `/GoPortfolio` (the repo is named GoPortfolio, not `portfolio`). The workflow sets them from the repo name automatically.
+
+## Later decisions
+
+- **Mobile navigation** is four short links that wrap under the site name at 320 px, so it needs no JavaScript. Client-side JS is only the theme toggle and the screenshot lightbox (native `<dialog>`).
+- **Home note.** The gratitude sentence sits in the hero as a pinned note linking to `/thanks`. Draft-app names are kept out of meta descriptions so a draft app cannot leak into production HTML (checked by grepping `dist/`).
+- **Dev-only `npm audit` findings** come from dev tooling (Lighthouse and its dependencies), not from anything shipped to visitors.
+- **Not done:** screen-reader testing, real-device testing and a check of the deployed URL; none were possible in this session. Screenshots and icons are absent, so the image pipeline was checked with a temporary test image that was then removed.
